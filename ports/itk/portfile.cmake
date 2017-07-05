@@ -1,11 +1,14 @@
 include(vcpkg_common_functions)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/InsightToolkit-4.12.0)
+set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/ITK-4.12.0)
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/InsightSoftwareConsortium/ITK/archive/v4.12.0.zip"
     FILENAME "ITK-4.12.0.zip"
     SHA512 9aa39cdd591c01c9accc73ec953a9c3efd87aa38b53f6ad253bf33a6c52050a7456cda6fd8234c84f76d95e70387125220898bae2f580d1e9bbacd24fc5edbee
 )
 vcpkg_extract_source_archive(${ARCHIVE})
+
+# directory path length needs to be shorter than 50 characters
+file(RENAME ${CURRENT_BUILDTREES_DIR}/src/InsightToolkit-4.12.0 ${SOURCE_PATH})
 
 if(VCPKG_LIBRARY_LINKAGE STREQUAL dynamic)
     # HACK: The FindHDF5.cmake script does not seem to detect the HDF5_DEFINITIONS correctly
@@ -27,16 +30,11 @@ vcpkg_configure_cmake(
         # -DITK_WRAP_PYTHON=ON
         # -DITK_PYTHON_VERSION=3
         -DITK_USE_SYSTEM_EXPAT=ON
-        -DITK_USE_SYSTEM_FREETYPE=ON
-        -DITK_USE_SYSTEM_GLEW=ON
-        -DITK_USE_SYSTEM_HDF5=OFF # HDF5 is problematic
-        -DITK_USE_SYSTEM_JSONCPP=ON
+        -DITK_USE_SYSTEM_HDF5=ON # HDF5 is problematic
         -DITK_USE_SYSTEM_JPEG=ON
         # -DITK_USE_SYSTEM_LIBRARIES=ON
-        -DITK_USE_SYSTEM_LIBXML2=ON
         -DITK_USE_SYSTEM_PNG=ON
         -DITK_USE_SYSTEM_TIFF=ON
-        -DITK_USE_SYSTEM_SZIP=ON
         -DITK_USE_SYSTEM_ZLIB=ON
         -DITK_INSTALL_DATA_DIR=share/itk/data
         -DITK_INSTALL_DOC_DIR=share/itk/doc
