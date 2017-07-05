@@ -7,13 +7,13 @@ vcpkg_download_distfile(ARCHIVE
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
-#if(VCPKG_LIBRARY_LINKAGE STREQUAL dynamic)
+if(VCPKG_LIBRARY_LINKAGE STREQUAL dynamic)
     # HACK: The FindHDF5.cmake script does not seem to detect the HDF5_DEFINITIONS correctly
     #       if HDF5 has been built without the tools (which is the case in the HDF5 port),
     #       so we set the BUILT_AS_DYNAMIC_LIB=1 flag here explicitly because we know HDF5
     #       has been build as dynamic library in the current case.
-#    list(APPEND ADDITIONAL_OPTIONS "-DHDF5_DEFINITIONS=-DH5_BUILT_AS_DYNAMIC_LIB=1")
-#endif()
+    list(APPEND ADDITIONAL_OPTIONS "-DHDF5_DEFINITIONS=-DH5_BUILT_AS_DYNAMIC_LIB=1")
+endif()
 
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
@@ -44,8 +44,7 @@ vcpkg_configure_cmake(
         -DITK_FORBID_DOWNLOADS=OFF
         -DModule_IOSTL=ON #example how to turn on a non-default module
         -DModule_ITKReview=ON
-        -DModule_ITKVtkGlue=OFF # this option requires VTK (to be listed in CONTROL)
-                                # VTK is a huge dependency which currently does not build properly
+        -DModule_ITKVtkGlue=ON # this option requires VTK
         ${ADDITIONAL_OPTIONS}
     OPTIONS_RELEASE
         -DHDF5_C_LIBRARY=${CURRENT_INSTALLED_DIR}/lib/hdf5.lib
