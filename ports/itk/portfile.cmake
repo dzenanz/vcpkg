@@ -1,9 +1,9 @@
 include(vcpkg_common_functions)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/ITK-4.11.0)
+set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/InsightToolkit-4.12.0)
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/InsightSoftwareConsortium/ITK/archive/v4.11.0.zip"
-    FILENAME "ITK-4.11.0.zip"
-    SHA512 0ca59bfd0197edaabe292897cf3e1b9a9bcfeab85973f6d4139f1bcdc67a487bb2c7c1dcf89161e4c39bfcbceaf26b31aeeb9c84abb636e95ef480becb6ae001
+    URLS "https://github.com/InsightSoftwareConsortium/ITK/archive/v4.12.0.zip"
+    FILENAME "ITK-4.12.0.zip"
+    SHA512 9aa39cdd591c01c9accc73ec953a9c3efd87aa38b53f6ad253bf33a6c52050a7456cda6fd8234c84f76d95e70387125220898bae2f580d1e9bbacd24fc5edbee
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
