@@ -7,13 +7,13 @@ vcpkg_download_distfile(ARCHIVE
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
-if(VCPKG_LIBRARY_LINKAGE STREQUAL dynamic)
+#if(VCPKG_LIBRARY_LINKAGE STREQUAL dynamic)
     # HACK: The FindHDF5.cmake script does not seem to detect the HDF5_DEFINITIONS correctly
     #       if HDF5 has been built without the tools (which is the case in the HDF5 port),
     #       so we set the BUILT_AS_DYNAMIC_LIB=1 flag here explicitly because we know HDF5
     #       has been build as dynamic library in the current case.
-    list(APPEND ADDITIONAL_OPTIONS "-DHDF5_DEFINITIONS=-DH5_BUILT_AS_DYNAMIC_LIB=1")
-endif()
+#    list(APPEND ADDITIONAL_OPTIONS "-DHDF5_DEFINITIONS=-DH5_BUILT_AS_DYNAMIC_LIB=1")
+#endif()
 
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
@@ -29,7 +29,7 @@ vcpkg_configure_cmake(
         -DITK_USE_SYSTEM_EXPAT=ON
         -DITK_USE_SYSTEM_FREETYPE=ON
         -DITK_USE_SYSTEM_GLEW=ON
-        -DITK_USE_SYSTEM_HDF5=ON
+        -DITK_USE_SYSTEM_HDF5=OFF # HDF5 is problematic
         -DITK_USE_SYSTEM_JSONCPP=ON
         -DITK_USE_SYSTEM_JPEG=ON
         # -DITK_USE_SYSTEM_LIBRARIES=ON
