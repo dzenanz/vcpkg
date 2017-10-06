@@ -1,0 +1,10 @@
+ CMake/FindHDF5.cmake | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/CMake/FindHDF5.cmake b/CMake/FindHDF5.cmake
+new file mode 100644
+index 0000000..5a41ed7
+--- /dev/null
++++ b/CMake/FindHDF5.cmake
+@@ -0,0 +1 @@
++include(${NewCMakeLocation}/FindHDF5.cmake)
