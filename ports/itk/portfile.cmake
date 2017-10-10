@@ -50,6 +50,8 @@ vcpkg_configure_cmake(
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
 
+file(REMOVE ${CURRENT_PACKAGES_DIR}/debug/bin/itkTestDriver.exe)
+file(REMOVE ${CURRENT_PACKAGES_DIR}/bin/itkTestDriver.exe)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 
