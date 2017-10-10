@@ -1,14 +1,14 @@
 include(vcpkg_common_functions)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/ITK-4.12.0)
+set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src)
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/InsightSoftwareConsortium/ITK/archive/v4.12.0.zip"
-    FILENAME "ITK-4.12.0.zip"
-    SHA512 9aa39cdd591c01c9accc73ec953a9c3efd87aa38b53f6ad253bf33a6c52050a7456cda6fd8234c84f76d95e70387125220898bae2f580d1e9bbacd24fc5edbee
+    URLS "https://github.com/dzenanz/ITK/releases/download/v4.12rc02/ITK_VCPKG.zip"
+    FILENAME "ITK-Test.zip"
+    SHA512 6283381b2a615ca40ddd05fa4e45a3dbc32ed6dd6bc02e0bb9462ef07762507970d4b56f0fdf8098d23361e52af9afec670a41acd33adb44a7b3cb7d6501bc65
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
 # directory path length needs to be shorter than 50 characters
-file(RENAME ${CURRENT_BUILDTREES_DIR}/src/InsightToolkit-4.12.0 ${SOURCE_PATH})
+# file(RENAME ${CURRENT_BUILDTREES_DIR}/src/InsightToolkit-4.12.0 ${SOURCE_PATH})
 
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
@@ -16,6 +16,7 @@ vcpkg_configure_cmake(
     OPTIONS
         -DBUILD_TESTING=OFF
         -DBUILD_EXAMPLES=OFF
+        -DDO_NOT_INSTALL_ITK_TEST_DRIVER=ON
         -DITK_INSTALL_DATA_DIR=share/itk/data
         -DITK_INSTALL_DOC_DIR=share/itk/doc
         -DITK_INSTALL_PACKAGE_DIR=share/itk
@@ -49,8 +50,6 @@ vcpkg_configure_cmake(
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
 
-file(REMOVE ${CURRENT_PACKAGES_DIR}/debug/bin/itkTestDriver.exe)
-file(REMOVE ${CURRENT_PACKAGES_DIR}/bin/itkTestDriver.exe)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 
