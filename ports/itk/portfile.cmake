@@ -16,34 +16,33 @@ vcpkg_configure_cmake(
     OPTIONS
         -DBUILD_TESTING=OFF
         -DBUILD_EXAMPLES=OFF
+        -DITK_INSTALL_DATA_DIR=share/itk/data
+        -DITK_INSTALL_DOC_DIR=share/itk/doc
+        -DITK_INSTALL_PACKAGE_DIR=share/itk
         -DITK_LEGACY_REMOVE=ON
         -DITK_USE_64BITS_IDS=ON
         -DITK_USE_CONCEPT_CHECKING=ON
         # -DITK_WRAP_PYTHON=ON
         # -DITK_PYTHON_VERSION=3
+        # -DITK_USE_SYSTEM_LIBRARIES=ON # enables USE_SYSTEM for many third party libraries which do not have vcpkg ports such as FFTW
         -DITK_USE_SYSTEM_EXPAT=ON
-        -DITK_USE_SYSTEM_HDF5=ON # HDF5 is problematic
         -DITK_USE_SYSTEM_JPEG=ON
-        # -DITK_USE_SYSTEM_LIBRARIES=ON
         -DITK_USE_SYSTEM_PNG=ON
         -DITK_USE_SYSTEM_TIFF=ON
         -DITK_USE_SYSTEM_ZLIB=ON
-        -DITK_INSTALL_DATA_DIR=share/itk/data
-        -DITK_INSTALL_DOC_DIR=share/itk/doc
-        -DITK_INSTALL_PACKAGE_DIR=share/itk
         -DITK_FORBID_DOWNLOADS=OFF
         -DITK_BUILD_DEFAULT_MODULES=OFF # turns on HDF5, which is problematic
         -DITKGroup_IO=OFF # turns on HDF5, which is problematic
-        -DModule_ITKIOMesh=ON
-        -DModule_ITKIOCSV=ON
+        -DModule_ITKReview=OFF # turns on HDF5, which is problematic
         -DITKGroup_Filtering=ON
         -DITKGroup_Registration=ON
         -DITKGroup_Segmentation=ON
-        -DModule_IOSTL=ON #example how to turn on a non-default module
-        -DModule_ITKReview=OFF
-        -DModule_ITKVtkGlue=ON # this option requires VTK
+        -DModule_ITKIOMesh=ON
+        -DModule_ITKIOCSV=ON
+        -DModule_IOSTL=ON # example how to turn on a non-default module
+        # -DModule_ITKVtkGlue=ON # this option requires VTK to be a dependency in CONTROL file
         -DModule_MorphologicalContourInterpolation=ON # example how to turn on a remote module
-        -DModule_RLEImage=ON
+        -DModule_RLEImage=ON # example how to turn on a remote module
         ${ADDITIONAL_OPTIONS}
 )
 
